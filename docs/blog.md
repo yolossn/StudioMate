@@ -8,7 +8,9 @@
 
 ## The studio that was drowning in messages
 
-My friend is a musician. With a few others (a lyricist, a composer, a singer or two) he runs **SoundStory**. People come to them with a story: *we met at a friend's wedding, we bonded over filter coffee and old Ilaiyaraaja songs, our first trip was to Munnar in the rain.* A few weeks later they get back a song about that story, made for an anniversary, a wedding, a birthday or a goodbye.
+My friend is a musician. With a few others (a lyricist, a composer, a singer or two) he runs **SoundStory**, a studio that turns personal memories into custom songs. A customer tells them who the song is for, the occasion, and the moments they want it to capture. The team writes original lyrics, composes the music and records the vocals, then delivers a song made specifically for that person—not a playlist or a generic dedication.
+
+An anniversary gift might become a song about a couple's first meeting and the small rituals they share. A retirement tribute might celebrate a parent's years of work and the ways they showed up for their family. The customer's story is the starting point; SoundStory's musicians turn it into something they can play at the celebration and keep afterwards.
 
 It's a beautiful business, and it's growing. That growth is the problem.
 
@@ -49,7 +51,9 @@ There's no orchestration code behind them. Each teammate is an agent in Switch w
 
 ## What happens when a story arrives
 
-Say Karthik wants a Tamil song for his wife Nila's fifth anniversary.
+Take Karthik's order: he wants to surprise his wife Nila with a Tamil song for their fifth wedding anniversary. They met at a friend's wedding in Coimbatore, bonded over filter coffee and old Ilaiyaraaja songs, and took their first trip together to Munnar—a hill town in Kerala—in the rain. He wants the song to thank Nila for five years of laughter.
+
+Those details are the material the studio has to work with. The brief needs to preserve who did what and why it matters; the customer draft needs to check which memory Karthik wants at the centre of the song. Here's how that order moves through StudioMate.
 
 ```mermaid
 flowchart LR
@@ -97,9 +101,6 @@ Then by the restraint. The agents didn't pretend the payment had arrived. They d
 
 What struck them most was what it meant for their week. They love doing what they do best, **making music**, and running the business around it had quietly become too much. A back office that handles the reading, planning, chasing and drafting, while leaving every real decision with them, changed how they thought about what AI could do for a small creative business.
 
-<!-- DRAFT QUOTE: placeholder wording. Confirm it with him or replace it with his real words before publishing. -->
-> *"Honestly, I thought it would just spit out some lyrics. But it read the story the way we read it: it caught Munnar, the filter coffee, Ilaiyaraaja. And it didn't decide anything for us. That's the part we've been drowning in. If this takes the messages off our plate, we can go back to making music."*
-
 ---
 
 ## Why Switch is the heart of it
@@ -123,7 +124,7 @@ This is close to the "Level 2" example in Switch's own README: *"a bootstrap cha
 
 With no orchestration code, every behaviour comes from plain-English instructions. Each rule below exists because I watched a run go wrong.
 
-**Hand the work back.** The chain kept stalling after the first teammate, because agents only wake up when someone mentions them. Now every specialist ends its reply by tagging the Studio Manager, and nobody else.
+**Publish and hand the work back.** The chain stalled when a specialist returned its report as private final text instead of posting it. Every specialist must use Switch's targeted message tool to publish the deliverable and wake the Studio Manager, and nobody else.
 
 **Deliver, don't ask.** The Accounts Desk once replied *"Can you share the payment evidence?"* and the whole order sat still. Now each teammate works with what's in the room, lists anything unknown as an open question for a human, and still delivers its full output.
 
@@ -151,4 +152,4 @@ This isn't AI that writes songs. It's something more useful: **AI that gives the
 
 SoundStory's team should be arguing about a chord change, not chasing a payment screenshot. With Switch, five AI teammates now sit in the same conversation as the humans. Each has its own name, sees only the orders it was invited to, and leaves every decision that matters with a person.
 
-*Code: [github.com/yolossn/StudioMate](https://github.com/yolossn/StudioMate) · Demo video: `<add link>` · #HowISwitch*
+*Code: [github.com/yolossn/StudioMate](https://github.com/yolossn/StudioMate) · #HowISwitch*

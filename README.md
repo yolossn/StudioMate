@@ -10,7 +10,7 @@ chat through [Switch](https://github.com/sandbox-quantum/switch), each under its
 own name. **The humans make the song. The agents run the studio around it.**
 Payment, artist choice and anything sent to the customer stay human decisions.
 
-- 📝 Blog post: [docs/blog.md](docs/blog.md)
+- 📝 Blog post: [Read on DEV Community](https://dev.to/yolossn/my-friend-makes-music-for-a-living-five-ai-teammates-now-run-his-studios-back-office-22bp) · [Repository copy](docs/blog.md)
 - 🎬 Demo video: _add link_
 - 🏁 Built for the WeMakeDevs × DevTools Academy × Switch **Flip the Switch** hackathon (Best Business Workflow)
 
@@ -25,7 +25,7 @@ messages in Mattermost.
 | Agent | Job | Never does |
 |---|---|---|
 | `studiomate-studio_manager` | Coordinator. Opens a room per order, posts the order card, runs the hand-off sequence, posts status summaries | Invent people, approvals or facts |
-| `studiomate-accounts_desk` | Reads payment evidence and says what a human must verify | Mark anything "paid" |
+| `studiomate-accounts_desk` | Tracks payment status and lists what a human must check in the actual account | Open receipt links or verify payment itself |
 | `studiomate-project_manager` | Milestone plan from today to the delivery date, with owners and risks | Assign people who were not named |
 | `studiomate-creative_director` | Artist brief for the human lyricist and musician (story, tone, style, open questions) | Write lyrics or music |
 | `studiomate-customer_liaison` | Drafts customer messages, clearly marked **DRAFT – not sent** | Contact the customer |
@@ -41,7 +41,8 @@ flowchart LR
   SUM --> H{Human decisions:<br/>verify payment, assign artists,<br/>approve & send message}
 ```
 
-Each specialist replies once and tags `@studiomate-studio_manager`. The Studio
+Each specialist publishes its reply once through Switch's targeted message tool
+to `@studiomate-studio_manager`; private final model text is not posted. The Studio
 Manager then hands off to the next specialist. After the fourth reply it posts
 one status summary and waits for a human.
 
