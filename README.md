@@ -1,15 +1,24 @@
-# StudioMate — an AI back office for a human creative studio
+# StudioMate: an AI back office for a human music studio
 
-StudioMate is a small studio where **human artists** (lyricist, musician, singer)
-make custom songs for customers' special occasions. The art stays human.
-StudioMate gives the studio an **AI back office**: five prompt-only agents
-connected through [Switch](https://github.com/sandbox-quantum/switch). They work
-together in Mattermost, each under its own identity, and run the business
-around the song.
+**SoundStory** is a small team of musicians who write custom songs for people's
+biggest moments. Every order also brings work that has nothing to do with
+music: reading long stories, checking payments, planning back from the
+occasion date, briefing the lyricist and replying to the customer.
 
-> Built for the WeMakeDevs "Flip the Switch" hackathon. The agents are driven only
-> by their prompts (`agents/runtime/*/AGENTS.md`). The demo path has no custom
-> orchestration scripts.
+StudioMate hands that work to **five AI teammates** that collaborate in a team
+chat through [Switch](https://github.com/sandbox-quantum/switch), each under its
+own name. **The humans make the song. The agents run the studio around it.**
+Payment, artist choice and anything sent to the customer stay human decisions.
+
+- 📝 Blog post: [docs/blog.md](docs/blog.md)
+- 🎬 Demo video: _add link_
+- 🏁 Built for the WeMakeDevs × DevTools Academy × Switch **Flip the Switch** hackathon (Best Business Workflow)
+
+![The agents handing work to each other in the order room](docs/images/handoffs.jpg)
+
+There is no orchestration code. Each agent is a prompt (`agents/runtime/*/AGENTS.md`)
+with a locked-down tool config. The collaboration happens through real Switch
+messages in Mattermost.
 
 ## The team
 
@@ -43,37 +52,57 @@ one status summary and waits for a human.
 - Customer messages are drafts until a human sends them. No agent contacts the customer.
 - The song is made by people. Agents never claim to have listened to it or approved it.
 
-## Verified demo run (synthetic data)
+## What one order looks like
 
-The order in room `karthik-raman-2026-12-12` (SO-ROW6) is fictional. It came in
-through the real Form → Sheet → Zapier → Mattermost path. The live run produced
-these outputs:
+A customer fills in a Google Form for a Tamil anniversary song. The order lands
+in the **New Orders** channel, someone on the team tags the Studio Manager, and
+within a few minutes the order has its own private room:
 
-1. Accounts Desk: payment UNVERIFIED; it asks for the receipt and the quoted price.
-2. Project Manager: a 35-day milestone table (brief → lyric draft → song v1 → preview → delivery), with risk flags and UNASSIGNED owners.
-3. Creative Director: an artist brief (Coimbatore wedding, filter coffee and Ilaiyaraaja, Munnar in the rain; soft acoustic), with open questions.
-4. Customer Liaison: an acknowledgement draft marked "DRAFT – not sent".
-5. Studio Manager: a status summary. Owner of the next action: the human.
+1. **Accounts Desk:** payment is UNVERIFIED, and here is what a human must check.
+2. **Project Manager:** a milestone plan back from the anniversary date, with risks and UNASSIGNED owners.
+3. **Creative Director:** an artist brief (a friend's wedding in Coimbatore, filter coffee and Ilaiyaraaja, Munnar in the rain) with open questions.
+4. **Customer Liaison:** a warm acknowledgement, marked "DRAFT – not sent", that asks the customer about the lyric feel.
+5. **Studio Manager:** one status summary naming who owns the next step. Then it waits for a human.
 
-No approvals, payments or listening were fabricated. Every customer, payment
-and story is synthetic. The file `fixtures/TEST-PAYMENT-002-NO-MONEY-PAID.png`
-is a synthetic screenshot that shows no money was paid.
+![Customer Liaison draft, waiting for a human to send it](docs/images/customer-draft.jpg)
 
-## Run it
+## Set up
 
-See [docs/switch-deployment.md](docs/switch-deployment.md) for setup and
-[docs/operating-flow.md](docs/operating-flow.md) for a demo script.
+You need macOS, Docker, [Switch Console](https://docs.switchagents.ai/switch-rooms/getting-started)
+and an AI subscription that OpenCode can use.
 
-## Repository notes
+1. **Install Switch Console and start a local server** using the
+   [quickstart](https://docs.switchagents.ai/switch-rooms/getting-started). It comes with
+   Mattermost, so no Slack workspace or admin rights are needed.
+2. **Create five OpenCode agents** in Switch Console, one per folder in `agents/runtime/`:
+   `studiomate-studio_manager`, `studiomate-accounts_desk`, `studiomate-project_manager`,
+   `studiomate-creative_director`, `studiomate-customer_liaison`.
+3. **Paste the instructions.** For each agent open **Agent settings → Agent instructions →
+   Expand**, paste the folder's `AGENTS.md`, and press **⌘S**. Check that the
+   "Unsaved changes" bar disappears.
+4. **Keep the safe defaults:** auto mode on, **bypass permissions off**, **can manage agents
+   off**. Each folder's `opencode.json` allows only Switch tools; only the Studio Manager
+   may create rooms.
+5. **Create a `New Orders` channel** and add the Studio Manager to it.
+6. **Optional intake:** Google Form → Google Sheet → Zapier "New Spreadsheet Row" → POST to
+   a Mattermost incoming webhook for New Orders (I used an ngrok tunnel to reach a local
+   server). Never commit the webhook URL.
+7. **Try it:** post an order in New Orders, reply
+   `@studiomate-studio_manager please take this order`, and watch the room fill in.
 
-- `agents/runtime/`: the five agents (`AGENTS.md` prompt plus a locked-down
-  `opencode.json` that allows only Switch tools). This is the product.
-- `docs/`: deployment guide, operating flow / demo script, and the [blog post](docs/blog.md).
-- `fixtures/`: synthetic test evidence.
+More detail: [docs/switch-deployment.md](docs/switch-deployment.md) (deployment and
+troubleshooting) and [docs/operating-flow.md](docs/operating-flow.md) (flow and demo script).
+
+## Repository
+
+- `agents/runtime/`: the five agents (`AGENTS.md` instructions plus a locked-down
+  `opencode.json`). This is the product.
+- `docs/`: deployment guide, operating flow and demo script, and the [blog post](docs/blog.md).
 - `tests/`: prompt guardrail tests. Run them with `python3 -m unittest discover -s tests -q`.
 
 ## Limitations
 
-- The agents use a small model (Claude Haiku 4.5 via OpenCode), and their output quality varies.
-  Agents act only when @-tagged.
+- The agents run on a small, fast model (Claude Haiku 4.5 via OpenCode). Wording quality
+  varies, which is one more reason a human reviews every draft.
+- Agents act only when @-tagged.
 - The ngrok/Zapier intake runs on a local machine, so it is not production hosting.

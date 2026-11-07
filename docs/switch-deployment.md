@@ -26,7 +26,8 @@ rooms and add members. Add the Studio Manager to **New Orders**.
 
 ## Troubleshooting
 - If a specialist asks a question instead of delivering, its instructions are probably not saved.
-  Re-check the "Reply exactly once, starting with @studiomate-studio_manager" rule.
+  Re-check that its saved instructions include "Reply once, and start that reply with
+  `@studiomate-studio_manager`" and "never ask Studio Manager for information before replying".
 - If the flow stalls after one reply, the specialist did not tag the Studio Manager. Re-tag
   the Studio Manager and ask it to continue.
 - If Zapier posts stop, check that the ngrok tunnel is up and that the zap uses the current URL.

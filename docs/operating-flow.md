@@ -35,8 +35,6 @@ again, and it posts an updated summary.
 3. Watch the four hand-offs, each from a different bot identity.
 4. End on the status summary. Point out the human gates: UNVERIFIED payment,
    UNASSIGNED artists and the unsent draft.
-5. Optional: post the synthetic "no money paid" screenshot and tag the Accounts
-   Desk. It must refuse to call the order paid.
 
 ## Guardrails in the prompts
 - Agents never invent people, payments, approvals or listening.
