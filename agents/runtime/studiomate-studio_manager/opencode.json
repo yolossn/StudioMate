@@ -1,0 +1,21 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "permission": {
+    "*": "deny",
+    "studiomate_*": "deny",
+    "switch_connect_to_room": "allow",
+    "switch_get_my_context": "allow",
+    "switch_get_room_detail": "allow",
+    "switch_list_rooms": "allow",
+    "switch_post_message": "allow",
+    "switch_read_context": "allow",
+    "switch_send_targeted_message": "allow",
+    "switch_create_room": "allow",
+    "bash": "deny",
+    "edit": "deny",
+    "read": "deny",
+    "write": "deny"
+  },
+  "mcp": {},
+  "model": "github-copilot/claude-haiku-4.5"
+}
